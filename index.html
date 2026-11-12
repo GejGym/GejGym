@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GejGym - Official Store & Hub</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- PAYPAL SDK Z TWOIM LIVE CLIENT ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAxRhXP_4tmA3CfArcws9GbVKcj5_v8lAhspVoV2NW2FARu8ca2XxJTEzRLl9z7btLOEksG7_2UuWUtP0&currency=PLN"></script>
+</head>
+<body>
+
+    <!-- LEWY RÓG: TIKTOK + ROZWIJANE "O NAS" + ROZWIJANY "KONTAKT" -->
+    <div class="about-corner">
+        <a href="https://www.tiktok.com/@gejgym67?_r=1&_t=ZN-9B6DPTqfwXO" target="_blank" class="tiktok-link">
+            <img src="https://i.imgur.com/yT9smX8.png" alt="TikTok Logo" class="tiktok-img">
+            <span class="tiktok-name">GejGym</span>
+        </a>
+
+        <!-- ROZWIJANE "O NAS" -->
+        <button class="about-toggle-btn" onclick="toggleAbout()">
+            O NAS <span id="about-arrow">▼</span>
+        </button>
+        <div id="about-content" class="about-dropdown-content">
+            <p>💪 <strong>Paczka ziomków z siłki.</strong></p>
+            <p>🔥 Robimy śmieszkowy i autentyczny kontent siłowniany, który łączy ludzi z tą samą zajawką.</p>
+            <p>⚡ Tworzymy markę dla tych, którzy trenują ciężko, ale potrafią się śmiać z samego siebie i nie biorą życia zbyt poważnie.</p>
+            <p>🚀 Ciągle rozwijamy nasz projekt, wpadają nowe dropy i zajawki – wbijaj z nami na grubo!</p>
+        </div>
+
+        <!-- ROZWIJANE "KONTAKT" -->
+        <button class="about-toggle-btn" onclick="toggleContact()" style="margin-top: 5px;">
+            KONTAKT <span id="contact-arrow">▼</span>
+        </button>
+        <div id="contact-content" class="about-dropdown-content">
+            <p>📩 <strong>Napisz do nas:</strong></p>
+            <p><a href="mailto:gejgym@gmail.com" class="contact-email">gejgym@gmail.com</a></p>
+        </div>
+    </div>
+
+    <!-- PRAWY RÓG: IKONA KOSZYKA -->
+    <div class="cart-corner" onclick="toggleCartDrawer()">
+        <div class="cart-icon-btn">
+            🛒 KOSZYK <span id="cart-count">0</span>
+        </div>
+    </div>
+
+    <!-- GŁÓWNA ZAWARTOŚĆ -->
+    <div class="content-container">
+        
+        <!-- LOGO (TRZY KLIKNIĘCIA OTWIERAJĄ PANEL ADMINA) -->
+        <div class="logo-container" onclick="handleLogoTripleClick()" title="Kliknij 3 razy, aby otworzyć panel admina">
+            <img src="https://i.imgur.com/JM5lfJe.png" alt="GG Logo" class="logo-img">
+        </div>
+
+        <!-- 4 OKIENKA -->
+        <div class="items-grid">
+            
+            <!-- OKIENKO 1 (KOSZULKA GYM KOMPRESS) -->
+            <div class="item-card">
+                <div class="item-image-box">
+                    <img src="https://i.imgur.com/hjBziOP.png" alt="Koszulka Gym Kompress" class="card-img">
+                </div>
+                <h3 class="item-title">Koszulka Gym Kompress</h3>
+                <div class="item-price">69.99 PLN</div>
+                <button class="btn-buy" onclick="openProductModal('Koszulka Gym Kompress')">Zobacz</button>
+            </div>
+
+            <!-- OKIENKO 2 (BLUZA GILDAN SOFTSTYLE) -->
+            <div class="item-card">
+                <div class="item-image-box">
+                    <img src="https://i.imgur.com/4TAdCR3.png" alt="Bluza" class="card-img">
+                </div>
+                <h3 class="item-title">Bluza</h3>
+                <div class="item-price">84.99 PLN</div>
+                <button class="btn-buy" onclick="openProductModal('Bluza GG Classic')">Zobacz</button>
+            </div>
+
+            <!-- OKIENKO 3 (NAKLEJKI) -->
+            <div class="item-card">
+                <div class="item-image-box">
+                    <img src="https://i.imgur.com/MWawlJ6.png" alt="Naklejki" class="card-img">
+                </div>
+                <h3 class="item-title">Naklejki</h3>
+                <div class="item-price">od 0.99 PLN / szt. (min. 20 szt.)</div>
+                <button class="btn-buy" onclick="openProductModal('Naklejki GG')">Zobacz</button>
+            </div>
+
+            <!-- OKIENKO 4 (TIPPLY) -->
+            <div class="item-card">
+                <div class="item-image-box">
+                    <a href="https://tipply.pl/@gejgym" target="_blank">
+                        <img src="https://i.imgur.com/nVz4lkX.jpeg" alt="Tipply" class="card-img">
+                    </a>
+                </div>
+                <h3 class="item-title">Wspomóż</h3>
+                <div class="item-price">Tipply</div>
+                <a href="https://tipply.pl/@gejgym" target="_blank" class="btn-buy-link">
+                    <button class="btn-buy">Wpłać Tipa</button>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PANEL ADMINISTRATORA (UKRYTY) -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-card admin-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeAdminPanel()">✕</button>
+            <h2 class="checkout-main-title" style="color: #ff6600;">🛠️ Panel Administratora - Stan Magazynu</h2>
+            
+            <div id="admin-login-box">
+                <p style="margin-bottom: 12px; color: #ccc;">Wpisz hasło administracyjne:</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="password" id="admin-pin-input" placeholder="Wpisz hasło" class="form-grid input" style="flex:1;">
+                    <button class="btn-buy modal-buy-now-btn" onclick="checkAdminPin()" style="flex:0.5; margin-top:0;">Zaloguj</button>
+                </div>
+            </div>
+
+            <div id="admin-content-box" style="display: none;">
+                <p style="margin-bottom: 15px; font-size: 0.9rem; color: #aaa;">Zmień stany magazynowe produktów. Po zmianie kliknij zapisz.</p>
+                <div id="admin-stock-list" class="admin-stock-list"></div>
+                <button class="btn-buy modal-buy-now-btn" onclick="saveAdminStock()" style="margin-top: 20px;">💾 Zapisz stany magazynowe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL (OKNO PRODUKTU) -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
+            
+            <div class="modal-body">
+                <!-- SLIDER ZDJĘĆ -->
+                <div class="modal-image-box">
+                    <button id="prev-slide-btn" class="slider-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+                    <img id="modal-img" src="" alt="Produkt" onclick="openFullscreenImg()" title="Kliknij, aby powiększyć zdjęcie">
+                    <button id="next-slide-btn" class="slider-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+                    <div id="slide-dots" class="slide-dots"></div>
+                </div>
+                
+                <div class="modal-info">
+                    <h2 id="modal-title" class="modal-product-title">Nazwa Produktu</h2>
+                    <div id="modal-price" class="modal-product-price">0.00 PLN</div>
+                    
+                    <!-- INFORMACJA O OSTATNICH SZTUKACH -->
+                    <div id="stock-warning-box" class="stock-warning-box" style="display: none;"></div>
+
+                    <p id="modal-desc" class="modal-product-desc">Opis...</p>
+
+                    <!-- DYNAMICZNY WYBÓR OPCJI / ROZMIARÓW -->
+                    <div class="modal-option-group">
+                        <label id="option-label" class="modal-label">Opcja:</label>
+                        <div id="size-selector-container" class="size-selector"></div>
+                    </div>
+
+                    <!-- ILOŚĆ -->
+                    <div class="modal-option-group">
+                        <label class="modal-label">Ilość:</label>
+                        <div class="quantity-selector">
+                            <button onclick="changeQty(-1)">-</button>
+                            <span id="qty-val">1</span>
+                            <button onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- PRZYCISKI AKCJI -->
+                    <div class="modal-buttons-group">
+                        <button id="add-to-cart-btn" class="btn-buy modal-cart-btn" onclick="addToCart()">Dodaj do koszyka</button>
+                        <button id="buy-now-btn" class="btn-buy modal-buy-now-btn" onclick="buyNow()">Kup teraz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL KASY: DOSTAWA I PŁATNOŚĆ -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-card checkout-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeCheckoutModal()">✕</button>
+            <h2 class="checkout-main-title">📦 Dostawa i Płatność</h2>
+
+            <div class="checkout-layout">
+                <!-- LEWA STRONA: FORMULARZ DANYCH + OPCJE DOSTAWY -->
+                <div class="checkout-form-section">
+                    <h3 class="checkout-subtitle">1. Dane do wysyłki</h3>
+                    <div class="form-grid" oninput="resetPaymentUnlock()">
+                        
+                        <div class="input-group">
+                            <input type="text" id="cust-name" placeholder="Imię i nazwisko (np. Jan Kowalski) *" required>
+                            <span class="error-msg" id="err-name">Wpisz poprawne imię i nazwisko (min. 2 słowa)</span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="email" id="cust-email" placeholder="Twój e-mail (np. jan@gmail.com) *" required>
+                            <span class="error-msg" id="err-email">Wpisz poprawny adres e-mail</span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="tel" id="cust-phone" placeholder="Numer telefonu (9 cyfr) *" maxlength="9" oninput="formatPhoneInput(this)" required>
+                            <span class="error-msg" id="err-phone">Wpisz poprawny 9-cyfrowy numer telefonu</span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="cust-street" placeholder="Ulica i nr domu / mieszkania *" required>
+                            <span class="error-msg" id="err-street">Wpisz ulicę wraz z numerem domu/mieszkania</span>
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="input-group" style="flex:1;">
+                                <input type="text" id="cust-zip" placeholder="Kod pocztowy (XX-XXX) *" maxlength="6" oninput="formatZipInput(this)" required>
+                                <span class="error-msg" id="err-zip">Format: XX-XXX</span>
+                            </div>
+                            <div class="input-group" style="flex:1.5;">
+                                <input type="text" id="cust-city" placeholder="Miasto *" oninput="formatCityInput(this)" required>
+                                <span class="error-msg" id="err-city">Wpisz poprawną nazwę miasta</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h3 class="checkout-subtitle" style="margin-top: 20px;">2. Sposób dostawy</h3>
+                    <div class="shipping-options">
+                        <label class="shipping-option-card active" onclick="selectShipping('inpost-paczkomat', this)">
+                            <input type="radio" name="shipping" value="inpost-paczkomat" checked>
+                            <div class="shipping-info">
+                                <strong>InPost - Paczkomat</strong>
+                                <span>Wygodny odbiór w wybranym Paczkomacie</span>
+                            </div>
+                            <div class="shipping-price" id="price-inpost-val">15.99 PLN</div>
+                        </label>
+
+                        <label class="shipping-option-card" onclick="selectShipping('inpost-kurier', this)">
+                            <input type="radio" name="shipping" value="inpost-kurier">
+                            <div class="shipping-info">
+                                <strong>InPost - Kurier</strong>
+                                <span>Dostawa kurierska pod same drzwi</span>
+                            </div>
+                            <div class="shipping-price" id="price-kurier-val">18.99 PLN</div>
+                        </label>
+
+                        <label class="shipping-option-card" onclick="selectShipping('odbior-osobisty', this)">
+                            <input type="radio" name="shipping" value="odbior-osobisty">
+                            <div class="shipping-info">
+                                <strong>Odbiór osobisty</strong>
+                                <span>Darmowy odbiór – ustalenie szczegółów po zakupie</span>
+                            </div>
+                            <div class="shipping-price" id="price-odbior-val">0.00 PLN</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- PRAWA STRONA: PODSUMOWANIE + METODA PŁATNOŚCI -->
+                <div class="checkout-summary-section">
+                    <h3 class="checkout-subtitle">3. Podsumowanie zamówienia</h3>
+                    <div id="checkout-items-list" class="checkout-items-list"></div>
+
+                    <div class="checkout-totals">
+                        <div class="total-row">
+                            <span>Produkty:</span>
+                            <span id="summary-subtotal">0.00 PLN</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Dostawa (<span id="summary-shipping-name">InPost - Paczkomat</span>):</span>
+                            <span id="summary-shipping-cost">15.99 PLN</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>DO ZAPŁATY:</span>
+                            <span id="summary-grand-total">0.00 PLN</span>
+                        </div>
+                    </div>
+
+                    <!-- PRZYCISK ZATWIERDZAJĄCY DANE PRZED PŁATNOŚCIĄ -->
+                    <button id="unlock-payment-btn" class="btn-buy modal-buy-now-btn" onclick="unlockPayments()" style="margin-top: 15px;">
+                        Zatwierdź dane i przejdź do płatności
+                    </button>
+
+                    <!-- SEKCJA METOD PŁATNOŚCI -->
+                    <div id="payment-methods-box" class="payment-methods-box" style="display: none;">
+                        <h3 class="checkout-subtitle" style="margin-top: 15px;">4. Wybierz metodę płatności</h3>
+                        
+                        <!-- PAYPAL -->
+                        <div id="checkout-paypal-container" style="margin-top: 10px;"></div>
+
+                        <!-- STRIPE (PLACEHOLDER) -->
+                        <button class="stripe-placeholder-btn" onclick="alert('Płatności Stripe (BLIK i Karty) będą dostępne wkrótce! Skorzystaj z PayPala powyżej.')">
+                            💳 Zapłać przez Stripe (BLIK / Karta) – Wkrótce
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SUKCESU PO ODBIORZE OSOBISTYM -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-card success-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeSuccessModal()">✕</button>
+            <h2 class="checkout-main-title" style="color: #00cc44;">🎉 Zamówienie opłacone!</h2>
+            <div class="success-content">
+                <p>Wybrałeś <strong>Odbiór osobisty</strong>. Dziękujemy za zamówienie!</p>
+                <p style="margin-top: 12px;">Żeby ustalić miejsce i czas odbioru, napisz do nas bezpośrednio na Instagramie:</p>
+                
+                <div class="instagram-box">
+                    <strong>Instagram: @blik_blok1</strong>
+                    <span>Kajetan Blokowski</span>
+                    <a href="https://www.instagram.com/blik_blok1?xtok=bDNseHBjcmk2NWxz" target="_blank" class="btn-buy modal-buy-now-btn" style="text-decoration: none; text-align: center; margin-top: 10px; display: block;">
+                        💬 Przejdź do Instagrama
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WYSUWANY PANEL KOSZYKA -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Twój Koszyk</h3>
+            <button class="cart-close-btn" onclick="toggleCartDrawer()">✕</button>
+        </div>
+        <div id="cart-items-container" class="cart-items-container">
+            <!-- Puste lub produkty -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Produkty razem:</span>
+                <span id="cart-total-price">0.00 PLN</span>
+            </div>
+            
+            <button class="btn-buy cart-checkout-btn" onclick="openCartCheckout()">Dostawa i Płatność ➔</button>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="fullscreen-lightbox" class="lightbox-overlay">
+        <button class="lightbox-close" onclick="closeFullscreenImg()">✕</button>
+        <button id="lb-prev-btn" class="slider-btn lightbox-prev" onclick="event.stopPropagation(); changeSlide(-1); updateLightboxImg();">&#10094;</button>
+        <img id="lightbox-img" src="" alt="Powiększone zdjęcie" onclick="event.stopPropagation()">
+        <button id="lb-next-btn" class="slider-btn lightbox-next" onclick="event.stopPropagation(); changeSlide(1); updateLightboxImg();">&#10095;</button>
+    </div>
+
+    <script>
+        function toggleAbout() {
+            const content = document.getElementById('about-content');
+            const arrow = document.getElementById('about-arrow');
+            content.style.display = (content.style.display === "block") ? "none" : "block";
+            arrow.textContent = (content.style.display === "block") ? "▲" : "▼";
+        }
+
+        function toggleContact() {
+            const content = document.getElementById('contact-content');
+            const arrow = document.getElementById('contact-arrow');
+            content.style.display = (content.style.display === "block") ? "none" : "block";
+            arrow.textContent = (content.style.display === "block") ? "▲" : "▼";
+        }
+
+        // ==========================================
+        // BAZA PRODUKTÓW I MAGAZYN (DOMYŚLNIE 10 SZTUK)
+        // ==========================================
+        const productsDB = {
+            'Koszulka Gym Kompress': {
+                price: 69.99,
+                images: ['https://i.imgur.com/hjBziOP.png', 'https://i.imgur.com/uKkP3q7.png', 'https://i.imgur.com/arZAXkV.png'],
+                desc: '🔥 Zarybista koszulka na silkę i nie tylko! Idealnie podkreśla sylwetkę, daje pełną swobodę ruchów i wchodzi kozacka pompa.\n\n📋 Specyfikacja:\n• Typ: Męskie koszulki kompresyjne\n• Materiał: Poliester, poliuretan\n• Waga: ok. 180 g\n\n📐 Wymiary:\n• Rozmiar M: Długość 62 cm | Klatka 82 cm\n• Rozmiar L: Długość 65 cm | Klatka 86 cm',
+                options: ['M', 'L'],
+                optionLabel: 'Rozmiar:'
+            },
+            'Bluza GG Classic': {
+                price: 84.99,
+                images: ['https://i.imgur.com/4TAdCR3.png'],
+                desc: '🔥 Klasyczna, solidna bluza z kapturem (Gildan Softstyle Midweight Fleece) stworzona na zimniejsze treningi i chłodne wieczory!\n\nCiepła, miła w dotyku, z przyjemną szczotkowaną podszewką. Nie traci fasonu i nie kurczy się w praniu. Must-have każdego dzika.\n\n📋 Specyfikacja:\n• Materiał: 80% bawełna ring-spun, 20% poliester\n• Gramatura: 285 g/m2\n• Kaptur: 2-częściowy, dopasowany\n• Kieszeń: typu kangur\n\n📐 Wymiary:\n• Rozmiar S: Długość 71.12 cm | Klatka 50.80 cm | Rękawek 86.36 cm\n• Rozmiar M: Długość 73.66 cm | Klatka 55.88 cm | Rękawek 88.90 cm\n• Rozmiar L: Długość 76.20 cm | Klatka 60.96 cm | Rękawek 93.98 cm',
+                options: ['S', 'M', 'L'],
+                optionLabel: 'Rozmiar:'
+            },
+            'Naklejki GG': {
+                price: 0.99,
+                variants: [
+                    { name: 'Naklejki GG - Wariant 1 (Logo)', price: 0.99, images: ['https://i.imgur.com/JM5lfJe.png'], desc: '🔥 Naklejki z klasycznym logo GG.\n• Minimalna ilość zamówienia to 20 sztuk!\n• Idealne na telefon, laptopa czy bidon na siłce!' },
+                    { name: 'Naklejki GG - Wariant 2 (Kod QR TikTok)', price: 1.67, images: ['https://i.imgur.com/DXCy0Tl.jpeg'], desc: '⚡ Naklejka z kodem QR bezpośrednio do naszego profilu na TikToku!\n• Minimalna ilość zamówienia to 20 sztuk!\n• Zeskanuj i wbijaj na nasz kontent.' }
+                ],
+                optionLabel: 'Wariant:'
+            }
+        };
+
+        let stockData = JSON.parse(localStorage.getItem('gejgym_stock')) || {
+            'Koszulka Gym Kompress_M': 10,
+            'Koszulka Gym Kompress_L': 10,
+            'Bluza GG Classic_S': 10,
+            'Bluza GG Classic_M': 10,
+            'Bluza GG Classic_L': 10,
+            'Naklejki GG - Wariant 1 (Logo)_Standard': 50,
+            'Naklejki GG - Wariant 2 (Kod QR TikTok)_Standard': 50
+        };
+
+        function getStockKey(prodName, optName) {
+            return `${prodName}_${optName}`;
+        }
+
+        function getStock(prodName, optName) {
+            const key = getStockKey(prodName, optName);
+            return stockData[key] !== undefined ? stockData[key] : 10;
+        }
+
+        function updateStockAfterPurchase(items) {
+            items.forEach(item => {
+                let baseName = item.name.includes('Naklejki') ? 'Naklejki GG' : item.name;
+                const key = getStockKey(baseName, item.option);
+                if (stockData[key] !== undefined) {
+                    stockData[key] = Math.max(0, stockData[key] - item.qty);
+                }
+            });
+            localStorage.setItem('gejgym_stock', JSON.stringify(stockData));
+        }
+
+        // OBSŁUGA UKRYTEGO PANELU ADMINA (TRZY KLIKNIĘCIA W LOGO LUB HASH #admin)
+        let logoClickCount = 0;
+        let logoClickTimer = null;
+
+        function handleLogoTripleClick() {
+            logoClickCount++;
+            if (logoClickCount === 1) {
+                logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 600);
+            } else if (logoClickCount === 3) {
+                clearTimeout(logoClickTimer);
+                logoClickCount = 0;
+                openAdminPanel();
+            }
+        }
+
+        window.addEventListener('hashchange', checkAdminHash);
+        window.addEventListener('load', checkAdminHash);
+
+        function checkAdminHash() {
+            if (window.location.hash === '#admin') {
+                openAdminPanel();
+            }
+        }
+
+        function openAdminPanel() {
+            document.getElementById('admin-modal').style.display = 'flex';
+            document.getElementById('admin-login-box').style.display = 'block';
+            document.getElementById('admin-content-box').style.display = 'none';
+            document.getElementById('admin-pin-input').value = '';
+        }
+
+        function checkAdminPin() {
+            const pin = document.getElementById('admin-pin-input').value;
+            // HASŁO ADMINISTRATORA
+            if (pin === 'G9#kP!9vM$xL2$zQ') {
+                document.getElementById('admin-login-box').style.display = 'none';
+                document.getElementById('admin-content-box').style.display = 'block';
+                renderAdminStockList();
+            } else {
+                alert('❌ Błędne hasło administracyjne!');
+            }
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-modal').style.display = 'none';
+            if (window.location.hash === '#admin') {
+                window.location.hash = '';
+            }
+        }
+
+        function renderAdminStockList() {
+            const container = document.getElementById('admin-stock-list');
+            container.innerHTML = '';
+            
+            for (const [key, qty] of Object.entries(stockData)) {
+                const row = document.createElement('div');
+                row.className = 'admin-stock-row';
+                row.innerHTML = `
+                    <span>${key.replace('_', ' [Opcja: ')}]:</span>
+                    <input type="number" min="0" value="${qty}" data-key="${key}" class="admin-stock-input">
+                `;
+                container.appendChild(row);
+            }
+        }
+
+        function saveAdminStock() {
+            const inputs = document.querySelectorAll('.admin-stock-input');
+            inputs.forEach(input => {
+                const key = input.getAttribute('data-key');
+                const val = parseInt(input.value);
+                if (!isNaN(val)) {
+                    stockData[key] = val;
+                }
+            });
+            localStorage.setItem('gejgym_stock', JSON.stringify(stockData));
+            alert('✅ Zapisano stany magazynowe pomyślnie!');
+            closeAdminPanel();
+        }
+
+        // ==========================================
+        // FORMATOWANIE I WALIDACJA PÓL NA ŻYWO
+        // ==========================================
+        function formatZipInput(input) {
+            let digits = input.value.replace(/\D/g, '').substring(0, 5);
+            if (digits.length > 2) {
+                input.value = digits.substring(0, 2) + '-' + digits.substring(2);
+            } else {
+                input.value = digits;
+            }
+        }
+
+        function formatPhoneInput(input) {
+            input.value = input.value.replace(/\D/g, '').substring(0, 9);
+        }
+
+        function formatCityInput(input) {
+            input.value = input.value.replace(/[0-9]/g, '');
+        }
+
+        function resetPaymentUnlock() {
+            const paymentBox = document.getElementById('payment-methods-box');
+            if (paymentBox && paymentBox.style.display === 'block') {
+                paymentBox.style.display = 'none';
+                document.getElementById('unlock-payment-btn').style.display = 'block';
+            }
+        }
+
+        let currentQty = 1;
+        let minAllowedQty = 1;
+        let currentImages = [];
+        let currentSlideIndex = 0;
+        let currentProductName = "";
+        let currentProductPrice = 0;
+        let currentVariants = null;
+        let activeVariantIndex = 0;
+
+        let cart = [];
+        let checkoutItems = [];
+        let selectedShippingType = 'inpost-paczkomat';
+
+        function openProductModal(prodName) {
+            const prod = productsDB[prodName];
+            currentProductName = prodName;
+            
+            if (prod.variants) {
+                currentVariants = prod.variants;
+                activeVariantIndex = 0;
+                minAllowedQty = 20;
+                loadVariantData(activeVariantIndex);
+            } else {
+                currentVariants = null;
+                currentProductPrice = prod.price;
+                minAllowedQty = 1;
+                document.getElementById('modal-title').textContent = prodName;
+                document.getElementById('modal-price').textContent = prod.price.toFixed(2) + ' PLN';
+                
+                const descEl = document.getElementById('modal-desc');
+                descEl.style.whiteSpace = "pre-line";
+                descEl.textContent = prod.desc;
+                
+                currentImages = Array.isArray(prod.images) ? prod.images : [prod.images];
+                currentSlideIndex = 0;
+                updateSlide();
+                setupSlideButtons();
+            }
+
+            document.getElementById('option-label').textContent = prod.optionLabel || 'Opcja:';
+            const sizeContainer = document.getElementById('size-selector-container');
+            sizeContainer.innerHTML = '';
+
+            if (prod.variants) {
+                prod.variants.forEach((v, index) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'variant-wrapper';
+
+                    const thumbImg = document.createElement('img');
+                    thumbImg.src = v.images[0];
+                    thumbImg.alt = `Wariant ${index + 1}`;
+                    thumbImg.className = 'variant-thumb';
+
+                    const btn = document.createElement('button');
+                    btn.className = `size-btn ${index === 0 ? 'active' : ''}`;
+                    btn.textContent = `Wariant ${index + 1}`;
+                    btn.onclick = function() {
+                        document.querySelectorAll('#size-selector-container .size-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        activeVariantIndex = index;
+                        loadVariantData(activeVariantIndex);
+                    };
+
+                    wrapper.appendChild(thumbImg);
+                    wrapper.appendChild(btn);
+                    sizeContainer.appendChild(wrapper);
+                });
+            } else {
+                prod.options.forEach((opt, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = `size-btn ${index === 0 ? 'active' : ''}`;
+                    btn.textContent = opt;
+                    btn.onclick = function() {
+                        document.querySelectorAll('#size-selector-container .size-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        updateStockWarning();
+                    };
+                    sizeContainer.appendChild(btn);
+                });
+            }
+
+            currentQty = minAllowedQty;
+            document.getElementById('qty-val').textContent = currentQty;
+            updateStockWarning();
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function loadVariantData(index) {
+            const v = currentVariants[index];
+            currentProductName = v.name;
+            currentProductPrice = v.price;
+            document.getElementById('modal-title').textContent = v.name;
+            document.getElementById('modal-price').textContent = v.price.toFixed(2) + ' PLN';
+            
+            const descEl = document.getElementById('modal-desc');
+            descEl.style.whiteSpace = "pre-line";
+            descEl.textContent = v.desc;
+
+            currentImages = Array.isArray(v.images) ? v.images : [v.images];
+            currentSlideIndex = 0;
+            updateSlide();
+            setupSlideButtons();
+            updateStockWarning();
+        }
+
+        function getActiveOptionName() {
+            if (currentVariants) {
+                return 'Standard';
+            }
+            return document.querySelector('#size-selector-container .size-btn.active')?.textContent || 'Standard';
+        }
+
+        function updateStockWarning() {
+            const opt = getActiveOptionName();
+            const baseName = currentProductName.includes('Naklejki') ? 'Naklejki GG' : currentProductName;
+            const stock = getStock(baseName, opt);
+            
+            const warnBox = document.getElementById('stock-warning-box');
+            const addBtn = document.getElementById('add-to-cart-btn');
+            const buyBtn = document.getElementById('buy-now-btn');
+
+            if (stock <= 0) {
+                warnBox.style.display = 'block';
+                warnBox.innerHTML = '❌ <strong>PRODUKT WYPRZEDANY!</strong> Brak sztuk na stanie.';
+                addBtn.disabled = true;
+                buyBtn.disabled = true;
+                addBtn.style.opacity = '0.5';
+                buyBtn.style.opacity = '0.5';
+            } else if (stock <= 3) {
+                warnBox.style.display = 'block';
+                warnBox.innerHTML = `🔥 <strong>OSTATNIE SZTUKI:</strong> pozostały tylko <strong>${stock}</strong> sztuki!`;
+                addBtn.disabled = false;
+                buyBtn.disabled = false;
+                addBtn.style.opacity = '1';
+                buyBtn.style.opacity = '1';
+            } else {
+                warnBox.style.display = 'none';
+                addBtn.disabled = false;
+                buyBtn.disabled = false;
+                addBtn.style.opacity = '1';
+                buyBtn.style.opacity = '1';
+            }
+        }
+
+        function setupSlideButtons() {
+            const prevBtn = document.getElementById('prev-slide-btn');
+            const nextBtn = document.getElementById('next-slide-btn');
+            const lbPrev = document.getElementById('lb-prev-btn');
+            const lbNext = document.getElementById('lb-next-btn');
+            const show = currentImages.length > 1 ? 'block' : 'none';
+            
+            if(prevBtn) prevBtn.style.display = show;
+            if(nextBtn) nextBtn.style.display = show;
+            if(lbPrev) lbPrev.style.display = show;
+            if(lbNext) lbNext.style.display = show;
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+
+        function changeSlide(direction) {
+            if (currentImages.length <= 1) return;
+            currentSlideIndex = (currentSlideIndex + direction + currentImages.length) % currentImages.length;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            if (currentImages.length > 0) {
+                document.getElementById('modal-img').src = currentImages[currentSlideIndex];
+                updateLightboxImg();
+
+                const dotsContainer = document.getElementById('slide-dots');
+                dotsContainer.innerHTML = '';
+                if (currentImages.length > 1) {
+                    currentImages.forEach((_, idx) => {
+                        const dot = document.createElement('span');
+                        dot.className = `dot ${idx === currentSlideIndex ? 'active-dot' : ''}`;
+                        dotsContainer.appendChild(dot);
+                    });
+                }
+            }
+        }
+
+        function openFullscreenImg() {
+            updateLightboxImg();
+            document.getElementById('fullscreen-lightbox').style.display = 'flex';
+        }
+
+        function updateLightboxImg() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            if (lightboxImg && currentImages.length > 0) {
+                lightboxImg.src = currentImages[currentSlideIndex];
+            }
+        }
+
+        function closeFullscreenImg() {
+            document.getElementById('fullscreen-lightbox').style.display = 'none';
+        }
+
+        function changeQty(delta) {
+            const opt = getActiveOptionName();
+            const baseName = currentProductName.includes('Naklejki') ? 'Naklejki GG' : currentProductName;
+            const stock = getStock(baseName, opt);
+
+            let newQty = currentQty + delta;
+            if (newQty < minAllowedQty) {
+                newQty = minAllowedQty;
+            }
+            if (newQty > stock) {
+                alert(`⚠️ Nie możesz dodać więcej! Na stanie mamy tylko ${stock} sztuk tego produktu.`);
+                return;
+            }
+            currentQty = newQty;
+            document.getElementById('qty-val').textContent = currentQty;
+        }
+
+        function addToCart() {
+            const opt = getActiveOptionName();
+            const baseName = currentProductName.includes('Naklejki') ? 'Naklejki GG' : currentProductName;
+            const stock = getStock(baseName, opt);
+
+            if (currentQty > stock) {
+                alert(`⚠️ Brak wystarczającej ilości na stanie! Dostępne sztuki: ${stock}`);
+                return;
+            }
+
+            const existingItem = cart.find(item => item.name === currentProductName && item.option === opt);
+            
+            if (existingItem) {
+                if (existingItem.qty + currentQty > stock) {
+                    alert(`⚠️ Przekroczysz dostępny stan magazynowy (${stock} szt.)!`);
+                    return;
+                }
+                existingItem.qty += currentQty;
+            } else {
+                cart.push({
+                    name: currentProductName,
+                    price: currentProductPrice,
+                    option: opt,
+                    qty: currentQty,
+                    image: currentImages[0]
+                });
+            }
+
+            updateCartUI();
+            closeProductModal();
+            toggleCartDrawer();
+        }
+
+        function buyNow() {
+            const opt = getActiveOptionName();
+            const baseName = currentProductName.includes('Naklejki') ? 'Naklejki GG' : currentProductName;
+            const stock = getStock(baseName, opt);
+
+            if (currentQty > stock) {
+                alert(`⚠️ Brak wystarczającej ilości na stanie! Dostępne sztuki: ${stock}`);
+                return;
+            }
+
+            checkoutItems = [{
+                name: currentProductName,
+                price: currentProductPrice,
+                option: opt,
+                qty: currentQty,
+                image: currentImages[0]
+            }];
+
+            closeProductModal();
+            openCheckoutModal();
+        }
+
+        function openCartCheckout() {
+            if (cart.length === 0) {
+                alert('Twój koszyk jest pusty!');
+                return;
+            }
+            checkoutItems = [...cart];
+            toggleCartDrawer();
+            openCheckoutModal();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.style.display = (drawer.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const countSpan = document.getElementById('cart-count');
+            const totalPriceSpan = document.getElementById('cart-total-price');
+
+            container.innerHTML = '';
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="cart-empty">Twój koszyk jest pusty.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    totalCount += item.qty;
+                    totalPrice += item.price * item.qty;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-item';
+                    itemDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>Opcja: ${item.option}</p>
+                            <p>${item.price.toFixed(2)} PLN</p>
+                            <div class="cart-qty-controls">
+                                <button onclick="changeCartItemQty(${index}, -1)">-</button>
+                                <span>${item.qty}</span>
+                                <button onclick="changeCartItemQty(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(itemDiv);
+                });
+            }
+
+            countSpan.textContent = totalCount;
+            totalPriceSpan.textContent = totalPrice.toFixed(2) + ' PLN';
+        }
+
+        function changeCartItemQty(index, delta) {
+            const item = cart[index];
+            const minQ = item.name.toLowerCase().includes('naklejki') ? 20 : 1;
+            const baseName = item.name.includes('Naklejki') ? 'Naklejki GG' : item.name;
+            const stock = getStock(baseName, item.option);
+            
+            if (delta < 0 && item.qty + delta < minQ) {
+                alert(`Minimalna ilość dla tego produktu to ${minQ} sztuk!`);
+                return;
+            }
+
+            if (delta > 0 && item.qty + delta > stock) {
+                alert(`⚠️ Nie ma więcej sztuk tego produktu na stanie! (Maksimum: ${stock})`);
+                return;
+            }
+
+            item.qty += delta;
+            if (item.qty <= 0) cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function hasOnlyStickers() {
+            if (checkoutItems.length === 0) return false;
+            return checkoutItems.every(item => item.name.toLowerCase().includes('naklejki'));
+        }
+
+        function getCurrentShippingCost() {
+            if (selectedShippingType === 'odbior-osobisty') return 0.00;
+            const onlyStickers = hasOnlyStickers();
+            if (selectedShippingType === 'inpost-paczkomat') {
+                return onlyStickers ? 10.99 : 15.99;
+            } else {
+                return onlyStickers ? 13.99 : 18.99;
+            }
+        }
+
+        function openCheckoutModal() {
+            document.getElementById('payment-methods-box').style.display = 'none';
+            document.getElementById('unlock-payment-btn').style.display = 'block';
+            
+            document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.form-grid input').forEach(el => el.classList.remove('input-error'));
+
+            const onlyStickers = hasOnlyStickers();
+            document.getElementById('price-inpost-val').textContent = (onlyStickers ? 10.99 : 15.99).toFixed(2) + ' PLN';
+            document.getElementById('price-kurier-val').textContent = (onlyStickers ? 13.99 : 18.99).toFixed(2) + ' PLN';
+            document.getElementById('price-odbior-val').textContent = '0.00 PLN';
+            
+            updateCheckoutSummary();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').style.display = 'none';
+        }
+
+        function selectShipping(type, labelElement) {
+            document.querySelectorAll('.shipping-option-card').forEach(el => el.classList.remove('active'));
+            labelElement.classList.add('active');
+            
+            selectedShippingType = type;
+            updateCheckoutSummary();
+
+            if (document.getElementById('payment-methods-box').style.display === 'block') {
+                renderCheckoutPayPalButton();
+            }
+        }
+
+        function getCheckoutSubtotal() {
+            return checkoutItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        }
+
+        function updateCheckoutSummary() {
+            const listDiv = document.getElementById('checkout-items-list');
+            listDiv.innerHTML = '';
+
+            checkoutItems.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'summary-item-row';
+                row.innerHTML = `
+                    <span>${item.qty}x ${item.name} (${item.option})</span>
+                    <strong>${(item.price * item.qty).toFixed(2)} PLN</strong>
+                `;
+                listDiv.appendChild(row);
+            });
+
+            const subtotal = getCheckoutSubtotal();
+            const shippingCost = getCurrentShippingCost();
+            
+            let shippingName = 'InPost - Paczkomat';
+            if (selectedShippingType === 'inpost-kurier') shippingName = 'InPost - Kurier';
+            if (selectedShippingType === 'odbior-osobisty') shippingName = 'Odbiór osobisty';
+
+            const grandTotal = subtotal + shippingCost;
+
+            document.getElementById('summary-subtotal').textContent = subtotal.toFixed(2) + ' PLN';
+            document.getElementById('summary-shipping-name').textContent = shippingName;
+            document.getElementById('summary-shipping-cost').textContent = shippingCost.toFixed(2) + ' PLN';
+            document.getElementById('summary-grand-total').textContent = grandTotal.toFixed(2) + ' PLN';
+        }
+
+        // ==========================================
+        // WALIDACJA Z CZERWONYMI KOMUNIKATAMI POD POLAMI
+        // ==========================================
+        function showError(inputId, errId) {
+            document.getElementById(inputId).classList.add('input-error');
+            document.getElementById(errId).style.display = 'block';
+        }
+
+        function hideError(inputId, errId) {
+            document.getElementById(inputId).classList.remove('input-error');
+            document.getElementById(errId).style.display = 'none';
+        }
+
+        function unlockPayments() {
+            const nameEl = document.getElementById('cust-name');
+            const emailEl = document.getElementById('cust-email');
+            const phoneEl = document.getElementById('cust-phone');
+            const streetEl = document.getElementById('cust-street');
+            const zipEl = document.getElementById('cust-zip');
+            const cityEl = document.getElementById('cust-city');
+
+            const name = nameEl.value.trim();
+            const email = emailEl.value.trim();
+            const phone = phoneEl.value.trim();
+            const street = streetEl.value.trim();
+            const zip = zipEl.value.trim();
+            const city = cityEl.value.trim();
+
+            let isValid = true;
+
+            const nameRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ-]{2,}(\s+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ-]{2,})+$/;
+            if (!nameRegex.test(name)) {
+                showError('cust-name', 'err-name');
+                isValid = false;
+            } else {
+                hideError('cust-name', 'err-name');
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                showError('cust-email', 'err-email');
+                isValid = false;
+            } else {
+                hideError('cust-email', 'err-email');
+            }
+
+            const phoneRegex = /^[0-9]{9}$/;
+            if (!phoneRegex.test(phone)) {
+                showError('cust-phone', 'err-phone');
+                isValid = false;
+            } else {
+                hideError('cust-phone', 'err-phone');
+            }
+
+            if (street.length < 4 || !/\d/.test(street)) {
+                showError('cust-street', 'err-street');
+                isValid = false;
+            } else {
+                hideError('cust-street', 'err-street');
+            }
+
+            const zipRegex = /^[0-9]{2}-[0-9]{3}$/;
+            if (!zipRegex.test(zip)) {
+                showError('cust-zip', 'err-zip');
+                isValid = false;
+            } else {
+                hideError('cust-zip', 'err-zip');
+            }
+
+            const cityRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s-]{2,}$/;
+            if (!cityRegex.test(city)) {
+                showError('cust-city', 'err-city');
+                isValid = false;
+            } else {
+                hideError('cust-city', 'err-city');
+            }
+
+            if (!isValid) return;
+
+            document.getElementById('unlock-payment-btn').style.display = 'none';
+            document.getElementById('payment-methods-box').style.display = 'block';
+            renderCheckoutPayPalButton();
+        }
+
+        function renderCheckoutPayPalButton() {
+            const container = document.getElementById('checkout-paypal-container');
+            container.innerHTML = '';
+
+            if (window.paypal) {
+                paypal.Buttons({
+                    style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+                    createOrder: function(data, actions) {
+                        const shippingCost = getCurrentShippingCost();
+                        const grandTotal = (getCheckoutSubtotal() + shippingCost).toFixed(2);
+                        
+                        const name = document.getElementById('cust-name').value.trim();
+                        const phone = document.getElementById('cust-phone').value.trim();
+                        const street = document.getElementById('cust-street').value.trim();
+                        const zip = document.getElementById('cust-zip').value.trim();
+                        const city = document.getElementById('cust-city').value.trim();
+
+                        let shippingName = 'InPost - Paczkomat';
+                        if (selectedShippingType === 'inpost-kurier') shippingName = 'InPost - Kurier';
+                        if (selectedShippingType === 'odbior-osobisty') shippingName = 'Odbiór osobisty';
+
+                        const itemsSummary = checkoutItems.map(i => `${i.qty}x ${i.name} [${i.option}]`).join(', ');
+                        const shippingDetails = `${shippingName} | ${name}, Tel: ${phone}, ${street}, ${zip} ${city}`;
+                        
+                        const fullNote = `${itemsSummary} || ${shippingDetails}`.substring(0, 127);
+
+                        return actions.order.create({
+                            purchase_units: [{
+                                description: fullNote,
+                                amount: {
+                                    value: grandTotal,
+                                    currency_code: 'PLN'
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            const isPickup = (selectedShippingType === 'odbior-osobisty');
+                            
+                            // AKTUALIZACJA MAGAZYNU PO OPŁACENIU
+                            updateStockAfterPurchase(checkoutItems);
+
+                            if (checkoutItems.length === cart.length) {
+                                cart = [];
+                                updateCartUI();
+                            }
+                            document.getElementById('checkout-modal').style.display = 'none';
+
+                            if (isPickup) {
+                                document.getElementById('success-modal').style.display = 'flex';
+                            } else {
+                                alert('✅ Dziękujemy za zamówienie! Płatność przyjęta. Twoje dane adresowe oraz wybrane produkty zostały przekazane do realizacji.');
+                            }
+                        });
+                    },
+                    onError: function(err) {
+                        alert('Wystąpił błąd podczas inicjowania płatności PayPal.');
+                        console.error(err);
+                    }
+                }).render('#checkout-paypal-container');
+            }
+        }
+    </script>
+
+</body>
+</html>
