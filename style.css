@@ -880,13 +880,13 @@ body {
     .modal-image-box, .modal-info { width: 100%; }
     .modal-image-box { height: 320px; }
 }
-/* Dopasowanie ramek zdjęć do ciemnego motywu jak na drugim zdjęciu */
+/* Szare tło ramek jak na wzorcu i większe odstępy między okienkami */
 @media screen and (max-width: 768px) {
   *:has(> .item-card) {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(130px, 1fr)) !important;
-    gap: 12px !important;
-    padding: 10px !important;
+    gap: 18px !important; /* Większy odstęp między okienkami */
+    padding: 12px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -900,8 +900,8 @@ body {
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    background: #121212 !important; /* Ciemne tło kafelka */
-    border: 2px solid #ff6600 !important; /* Pomarańczowa ramka */
+    background: #121212 !important;
+    border: 2px solid #ff6600 !important;
     border-radius: 12px !important;
   }
 
@@ -911,7 +911,7 @@ body {
     margin-bottom: 8px !important;
     overflow: hidden !important;
     border-radius: 8px !important;
-    background: #000000 !important; /* Ciemne tło ramki zdjęcia dokładnie jak na drugim zdj */
+    background: #1e1e1e !important; /* Elegancki szary odcień ramki jak na zdjęciu wzorcowym */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
