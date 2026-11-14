@@ -880,9 +880,9 @@ body {
     .modal-image-box, .modal-info { width: 100%; }
     .modal-image-box { height: 320px; }
 }
-/* Kompaktowy i elegancki układ 2x2 na telefonach */
+/* Idealny układ 2x2 i kompaktowe proporcje na telefonie */
 @media screen and (max-width: 768px) {
-  .products-container, .grid-container, .shop-grid {
+  *:has(> .item-card) {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
@@ -891,41 +891,59 @@ body {
     box-sizing: border-box !important;
   }
 
-  /* Dopasowanie samych kafelków (wyłączenie sztywnej wysokości) */
-  .products-container > div, .grid-container > div, .shop-grid > div, .product-card, .card {
+  .item-card {
+    width: 100% !important;
     height: auto !important;
     min-height: unset !important;
     padding: 10px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
   }
 
-  /* Skrócenie zdjęć produktów, żeby nie rozciągały kafelka */
-  .products-container img, .grid-container img, .shop-grid img, .product-card img, .card img {
+  .item-image-box {
     width: 100% !important;
-    height: 120px !important;
-    object-fit: cover !important;
-    border-radius: 6px !important;
+    height: 115px !important;
     margin-bottom: 8px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  /* Mniejsze, zgrabne tytuły, opisy i przyciski */
-  .products-container h2, .products-container h3, .product-card h3, .card h3 {
-    font-size: 14px !important;
+  .card-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .item-title {
+    font-size: 13px !important;
     line-height: 1.2 !important;
     margin: 4px 0 !important;
+    min-height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
 
-  .products-container p, .product-card p, .card p {
-    font-size: 12px !important;
-    line-height: 1.3 !important;
+  .item-price {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
     margin-bottom: 8px !important;
+    text-align: center !important;
   }
 
-  .products-container button, .product-card button, .card button {
-    padding: 8px 6px !important;
-    font-size: 12px !important;
+  .btn-buy, .btn-buy-link {
     width: 100% !important;
+    display: block !important;
+  }
+
+  .btn-buy {
+    padding: 8px 4px !important;
+    font-size: 12px !important;
   }
 }
