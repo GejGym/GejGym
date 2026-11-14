@@ -880,13 +880,13 @@ body {
     .modal-image-box, .modal-info { width: 100%; }
     .modal-image-box { height: 320px; }
 }
-/* Idealny układ 2x2 i kompaktowe proporcje na telefonie */
+/* Ostateczny, elegancki układ 2x2 na telefonach z odstępami */
 @media screen and (max-width: 768px) {
   *:has(> .item-card) {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    padding: 10px !important;
+    grid-template-columns: repeat(2, minmax(130px, 1fr)) !important;
+    gap: 14px !important;
+    padding: 12px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -895,18 +895,20 @@ body {
     width: 100% !important;
     height: auto !important;
     min-height: unset !important;
-    padding: 10px !important;
+    padding: 12px 8px !important;
     margin: 0 !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+    background: #ffffff;
+    border-radius: 8px;
   }
 
   .item-image-box {
     width: 100% !important;
-    height: 115px !important;
-    margin-bottom: 8px !important;
+    height: 110px !important;
+    margin-bottom: 6px !important;
     overflow: hidden !important;
     display: flex !important;
     align-items: center !important;
@@ -914,8 +916,8 @@ body {
   }
 
   .card-img {
-    width: 100% !important;
-    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
     object-fit: contain !important;
   }
 
@@ -923,10 +925,6 @@ body {
     font-size: 13px !important;
     line-height: 1.2 !important;
     margin: 4px 0 !important;
-    min-height: 30px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     text-align: center !important;
   }
 
@@ -943,7 +941,7 @@ body {
   }
 
   .btn-buy {
-    padding: 8px 4px !important;
-    font-size: 12px !important;
+    padding: 7px 4px !important;
+    font-size: 11px !important;
   }
 }
