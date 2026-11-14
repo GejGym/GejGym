@@ -880,7 +880,7 @@ body {
     .modal-image-box, .modal-info { width: 100%; }
     .modal-image-box { height: 320px; }
 }
-/* Pełne wypełnienie kafelków grafiką bez białego tła */
+/* Dopasowanie ramek zdjęć do ciemnego motywu jak na drugim zdjęciu */
 @media screen and (max-width: 768px) {
   *:has(> .item-card) {
     display: grid !important;
@@ -894,35 +894,39 @@ body {
   .item-card {
     width: 100% !important;
     height: auto !important;
-    padding: 8px !important;
+    padding: 10px !important;
     margin: 0 !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden !important;
+    background: #121212 !important; /* Ciemne tło kafelka */
+    border: 2px solid #ff6600 !important; /* Pomarańczowa ramka */
+    border-radius: 12px !important;
   }
 
   .item-image-box {
     width: 100% !important;
-    height: 145px !important; /* Wysokość ramki zdjęcia */
+    height: 135px !important;
     margin-bottom: 8px !important;
     overflow: hidden !important;
-    border-radius: 6px !important;
-    background: transparent !important; /* Usunięcie jakiegokolwiek tła */
+    border-radius: 8px !important;
+    background: #000000 !important; /* Ciemne tło ramki zdjęcia dokładnie jak na drugim zdj */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .card-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* Rozciąga grafikę na całą szerokość i wysokość bez pasów */
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
     display: block !important;
   }
 
   .item-title {
     font-size: 13px !important;
+    color: #ffffff !important;
     line-height: 1.2 !important;
     margin: 4px 0 !important;
     text-align: center !important;
@@ -930,7 +934,8 @@ body {
 
   .item-price {
     font-size: 11px !important;
-    margin-bottom: 6px !important;
+    color: #ff8800 !important;
+    margin-bottom: 8px !important;
     text-align: center !important;
   }
 
@@ -940,8 +945,7 @@ body {
   }
 
   .btn-buy {
-    padding: 7px 4px !important;
-    font-size: 11px !important;
+    padding: 8px 4px !important;
+    font-size: 12px !important;
   }
-}
 }
