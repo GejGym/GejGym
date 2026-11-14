@@ -880,13 +880,13 @@ body {
     .modal-image-box, .modal-info { width: 100%; }
     .modal-image-box { height: 320px; }
 }
-/* Ostateczny, elegancki układ 2x2 na telefonach z odstępami */
+/* Większe zdjęcia bez białego tła w układzie 2x2 */
 @media screen and (max-width: 768px) {
   *:has(> .item-card) {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(130px, 1fr)) !important;
-    gap: 14px !important;
-    padding: 12px !important;
+    gap: 12px !important;
+    padding: 10px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -894,8 +894,7 @@ body {
   .item-card {
     width: 100% !important;
     height: auto !important;
-    min-height: unset !important;
-    padding: 12px 8px !important;
+    padding: 8px !important;
     margin: 0 !important;
     box-sizing: border-box !important;
     display: flex !important;
@@ -907,18 +906,16 @@ body {
 
   .item-image-box {
     width: 100% !important;
-    height: 110px !important;
+    height: 135px !important; /* Zwiększona wysokość na zdjęcia */
     margin-bottom: 6px !important;
     overflow: hidden !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    border-radius: 6px;
   }
 
   .card-img {
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Wypełnia całe pole bez białego tła */
   }
 
   .item-title {
@@ -930,8 +927,7 @@ body {
 
   .item-price {
     font-size: 11px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 8px !important;
+    margin-bottom: 6px !important;
     text-align: center !important;
   }
 
