@@ -880,7 +880,7 @@ body {
     .modal-image-box, .modal-info { width: 100%; }
     .modal-image-box { height: 320px; }
 }
-/* Większe zdjęcia bez białego tła w układzie 2x2 */
+/* Pełne wypełnienie kafelków grafiką bez białego tła */
 @media screen and (max-width: 768px) {
   *:has(> .item-card) {
     display: grid !important;
@@ -902,20 +902,23 @@ body {
     justify-content: space-between !important;
     background: #ffffff;
     border-radius: 8px;
+    overflow: hidden !important;
   }
 
   .item-image-box {
     width: 100% !important;
-    height: 135px !important; /* Zwiększona wysokość na zdjęcia */
-    margin-bottom: 6px !important;
+    height: 145px !important; /* Wysokość ramki zdjęcia */
+    margin-bottom: 8px !important;
     overflow: hidden !important;
-    border-radius: 6px;
+    border-radius: 6px !important;
+    background: transparent !important; /* Usunięcie jakiegokolwiek tła */
   }
 
   .card-img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important; /* Wypełnia całe pole bez białego tła */
+    object-fit: cover !important; /* Rozciąga grafikę na całą szerokość i wysokość bez pasów */
+    display: block !important;
   }
 
   .item-title {
@@ -940,4 +943,5 @@ body {
     padding: 7px 4px !important;
     font-size: 11px !important;
   }
+}
 }
